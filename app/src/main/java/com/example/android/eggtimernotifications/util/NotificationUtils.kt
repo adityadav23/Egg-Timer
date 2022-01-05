@@ -38,9 +38,10 @@ private val FLAGS = 0
  * @param context, activity context.
  */
 fun NotificationManager.sendNotification(messageBody: String, applicationContext: Context) {
-    // Create the content intent for the notification, which launches
-    // this activity
-    // TODO: Step 1.11 create intent
+
+
+    // Create the content intent for the notification, which launches this activity
+
     val contentIntent = Intent(applicationContext, MainActivity :: class.java)
     val contentPendingIntent = PendingIntent.getActivity(
         applicationContext,
@@ -48,11 +49,20 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         contentIntent,
         PendingIntent.FLAG_UPDATE_CURRENT
     )
-    // TODO: Step 1.12 create PendingIntent
 
-    // TODO: Step 2.0 add style
+    //  add style
+
+    val eggImage = BitmapFactory.decodeResource(
+        applicationContext.resources,
+        R.drawable.cooked_egg)
+
+    //Creating a new bigPictureStyle
+    val bigPicStyle = NotificationCompat.BigPictureStyle()
+        .bigPicture(eggImage)
+        .bigLargeIcon(null)
 
     // TODO: Step 2.2 add snooze action
+
 
     // TODO: Step 1.2 get an instance of NotificationCompat.Builder
     // Build the notification
@@ -67,8 +77,9 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
     // TODO: Step 1.13 set content intent
         .setContentIntent(contentPendingIntent)
         .setAutoCancel(true)
-        // TODO: Step 2.1 add style to builder
-
+        // add style to builder
+        .setStyle(bigPicStyle)
+        .setLargeIcon(eggImage)
         // TODO: Step 2.3 add snooze action
 
         // TODO: Step 2.5 set priority
